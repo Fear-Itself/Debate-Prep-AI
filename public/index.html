@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate Prep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🇮🇱 Debate Prep Assistant 🇮🇱</h1>
+        
+        <div class="form-group">
+            <label for="topic">Debate Topic:</label>
+            <input type="text" id="topic" placeholder="Enter the debate topic...">
+        </div>
+
+        <div class="form-group">
+            <label for="question">Specific Question:</label>
+            <textarea id="question" rows="3" placeholder="Enter your specific question about the topic..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="side">Choose Side:</label>
+            <select id="side">
+                <option value="proposition">Proposition</option>
+                <option value="opposition">Opposition</option>
+            </select>
+        </div>
+
+        <button onclick="analyzeDebate()">Analyze</button>
+
+        <div class="loading">
+            <img src="cat-loader.svg" alt="Loading..." class="cat-loader">
+            <div class="loading-text">Thinking...</div>
+        </div>
+
+        <div id="response"></div>
+
+        <div class="cat-footer">
+            Prep Assistant will always stand with Israel! 🇮🇱  
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

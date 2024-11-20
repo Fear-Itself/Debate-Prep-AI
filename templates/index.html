@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate Prep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amber-primary: #FFA000;
+            --amber-light: #FFB74D;
+            --amber-dark: #FF6F00;
+            --bg-color: #FFF8E1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/cat-pattern.png');
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--amber-dark);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cat-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--amber-dark);
+            font-weight: 600;
+        }
+
+        input[type="text"], 
+        textarea, 
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--amber-light);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--amber-dark);
+        }
+
+        button {
+            background-color: var(--amber-primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: var(--amber-dark);
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #FFF3E0;
+            white-space: pre-wrap;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loading img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .cat-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--amber-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇮🇱 Debate Prep Assistant 🇮🇱 </h1>
+        
+        <div class="form-group">
+            <label for="topic">Debate Topic:</label>
+            <input type="text" id="topic" placeholder="Enter the debate topic...">
+        </div>
+
+        <div class="form-group">
+            <label for="question">Specific Question:</label>
+            <textarea id="question" rows="3" placeholder="Enter your specific question about the topic..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="side">Choose Side:</label>
+            <select id="side">
+                <option value="proposition">Proposition</option>
+                <option value="opposition">Opposition</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="model">Choose AI Model:</label>
+            <select id="model">
+                <option value="claude">Claude AI</option>
+                <option value="gemini">Google Gemini</option>
+                <option value="gpt">ChatGPT</option>
+            </select>
+        </div>
+
+        <button onclick="analyzeDebate()">Analyze</button>
+
+        <div class="loading">
+            <img src="https://media.giphy.com/media/vMSXa7KFGx49aeeXhe/giphy.gif" alt="Loading...">
+        </div>
+
+        <div id="response"></div>
+
+        <div class="cat-footer">
+            🇮🇱 Debate Preper AI stands with Israel 🇮🇱
+        </div>
+    </div>
+
+    <script>
+        async function analyzeDebate() {
+            const topic = document.getElementById('topic').value;
+            const question = document.getElementById('question').value;
+            const side = document.getElementById('side').value;
+            const model = document.getElementById('model').value;
+            const loading = document.querySelector('.loading');
+            const response = document.getElementById('response');
+
+            if (!topic || !question) {
+                alert('Please fill in both topic and question fields.');
+                return;
+            }
+
+            loading.style.display = 'block';
+            response.textContent = '';
+
+            try {
+                const res = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        topic,
+                        question,
+                        side,
+                        model
+                    }),
+                });
+
+                const data = await res.json();
+                
+                if (data.success) {
+                    response.textContent = data.response;
+                } else {
+                    response.textContent = 'Error: ' + data.error;
+                }
+            } catch (error) {
+                response.textContent = 'Error: ' + error.message;
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

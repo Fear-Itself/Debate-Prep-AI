@@ -1,0 +1,172 @@
+:root {
+    --amber-primary: #FFA000;
+    --amber-light: #FFB74D;
+    --amber-dark: #FF6F00;
+    --bg-color: #FFF8E1;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    background-image: url('https://www.transparenttextures.com/patterns/cat-pattern.png');
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    color: var(--amber-dark);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    animation: slideIn 0.5s ease-in;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--amber-dark);
+    font-weight: 600;
+}
+
+input[type="text"], 
+textarea, 
+select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--amber-light);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 248, 225, 0.5);
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--amber-dark);
+    box-shadow: 0 0 5px var(--amber-light);
+    transform: scale(1.01);
+}
+
+button {
+    background-color: var(--amber-primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background-color: var(--amber-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 160, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#response {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #FFF3E0;
+    white-space: pre-wrap;
+    animation: fadeIn 0.5s ease-in;
+    border-left: 4px solid var(--amber-primary);
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.cat-loader {
+    width: 80px;
+    height: 80px;
+    animation: catBounce 1s infinite ease-in-out;
+}
+
+.loading-text {
+    color: var(--amber-dark);
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 16px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes catBounce {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+    }
+    25% {
+        transform: translateY(-15px) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.cat-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--amber-dark);
+    font-size: 14px;
+    animation: fadeIn 1s ease-in;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+}
