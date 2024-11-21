@@ -14,7 +14,7 @@ async function analyzeDebate() {
     response.textContent = '';
 
     try {
-        const res = await fetch('/analyze', {
+        const res = await fetch('/.netlify/functions/analyze', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,6 +25,10 @@ async function analyzeDebate() {
                 side
             }),
         });
+
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
+        }
 
         const data = await res.json();
         
